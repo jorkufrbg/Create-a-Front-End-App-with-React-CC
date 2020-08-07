@@ -1,4 +1,5 @@
-This repository contains code from Codecademy's Create a Front-End App with React ( https://www.codecademy.com/learn/paths/build-web-apps-with-react)
+This repository contains code from Codecademy's Create a Front-End App with React:
+https://www.codecademy.com/learn/paths/build-web-apps-with-react
 
 CONTENTS:
 1. Introduction to JavaScript and Building Apps
