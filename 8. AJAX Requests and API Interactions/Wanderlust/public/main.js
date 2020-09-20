@@ -1,10 +1,10 @@
 // Foursquare API Info
-const clientId = '5WZVKIWEMKKB3XL2B2YBGVQOVAKVXRFSFCPEUUMNBGBERZ3M';
-const clientSecret = '5SRF251JYLBNYEFCE1FT4EFGUUUHWYRT01FK54ZSYG4IO333';
+const clientId = '';
+const clientSecret = '';
 const url = 'https://api.foursquare.com/v2/venues/explore?near=';
 
 // OpenWeather Info
-const openWeatherKey = 'f009b95f07c99980f904be2b50721913';
+const openWeatherKey = '';
 const weatherUrl = 'https://api.openweathermap.org/data/2.5/weather';
 
 // Page Elements
