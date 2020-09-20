@@ -7,8 +7,11 @@ class BusinessList extends React.Component {
         return (
             <div className="BusinessList">
                 {
-                    this.props.businesses.map((business) => {
-                        return <Business business={business} />;
+                    this.props.businesses.map(business => {
+                        return <Business
+                            business={business}
+                            key={business.id} //Every rendered list item gets an unique ID of each business
+                        />
                     })
                 }
             </div>
@@ -16,4 +19,4 @@ class BusinessList extends React.Component {
     }
 }
 
-export default BusinessList;
+export default BusinessList; //Exports the BusinessList class
