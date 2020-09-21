@@ -14,6 +14,7 @@ class TrackList extends React.Component {
                         return <Track
                             track={track} //Passes the current track as an attribute called track to the Track component.
                             key={track.id} //Keys are unique strings used by React in order to correctly pair each element with it's coresponding array item.
+                            onAdd={this.props.onAdd} //Passes onAdd from the TrackList component to the Track component
                         />
                     })
                 }

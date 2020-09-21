@@ -9,7 +9,7 @@ class Playlist extends React.Component {
     render() { //A Component class must contain the render() method. Rendering is the only way for a component to pass props to another component.
         return ( //Returns the JSX representation of the Component instance. Needed to make a component display data
             <div className="Playlist">
-                <input defaultValue={'New Playlist'} />
+                <input defaultValue={'My Playlists'} />
 
                 {/* Component Instance of the TrackList Class. Instances inherit all methods of the Component Class*/}
                 <TrackList

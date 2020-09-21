@@ -14,6 +14,8 @@ class SearchResults extends React.Component {
                 {/*Component Instance of the TrackList Class. Instances inherit all methods of the Component Class*/}
                 <TrackList
                     tracks={this.props.searchResults} /*Search Results Component passes information to tracks attribute of the TrackList Component*/
+                    onAdd={this.props.onAdd} //Pass onAdd from the SearchResults component to the TrackList component
+                    isRemoval={false}
                 />
 
             </div>

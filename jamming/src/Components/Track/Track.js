@@ -5,12 +5,32 @@ import './Track.css';
 Component Classes are factories that produce Components with each his own unique props and local state by following a set of instructions.*/
 class Track extends React.Component {
 
+    constructor(props) {//Constructor Method to init object's state in a Class. Assigns an object to this.state. Makes it a STATEFUL Component
+
+        /*Gets called before any other statement in the constructor. Binds event handling methods occuring in given Component
+         Information that gets passed from one component to another is known as “props.”] */
+        super(props);
+
+        /*Creating a component class method that uses the .this keyword requires, binding that method inside of the constructor fucntion of the given component class.
+        bind() creates a new function that, when called, has its this keyword set to the provided value.*/
+        this.addTrack = this.addTrack.bind(this);
+    }
+
     renderAction() {//Method displaying - or + in the <button> element depending on the boolean value of isRemoval
         if (this.props.isRemoval) {
-            return <button className="Track-action">-</button>
+            return <button
+                className="Track-action"
+            >-</button>
         } else {
-            return <button className="Track-action">+</button>
+            return <button
+                className="Track-action"
+                onClick={this.addTrack} //Adds an onClick property with the pushed track value from the playlist
+            >+</button>
         }
+    }
+
+    addTrack() {//Uses the addTrack(track) Method passed down from App Component Class to push the current track to a playlist
+        this.props.onAdd(this.props.track);
     }
 
     render() {//A Component class must contain the render() method. Rendering is the only way for a component to pass props to another component.

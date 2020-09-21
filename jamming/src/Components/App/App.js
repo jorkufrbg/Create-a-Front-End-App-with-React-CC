@@ -17,18 +17,38 @@ class App extends React.Component {
     super(props);
 
     this.state = { //Object representing initial state of the component.
-      searchResults: [ //Array of objects containing the name, artist, album and id properties 
-        { name: 'name1', artist: 'artist1', album: 'album1', id: 1 },
-        { name: 'name2', artist: 'artist2', album: 'album2', id: 2 },
-        { name: 'name3', artist: 'artist3', album: 'album3', id: 3 }
+      searchResults: [ //Array of objects containing the name, artist, album and id properties from search results
+        { name: 'Made of Light', artist: 'Emperor', album: 'Dispositions', id: 1 },
+        { name: 'All for you', artist: 'Wilkinson', album: 'single', id: 2 },
+        { name: 'Into the FIre', artist: 'Kove', album: 'Nightfires', id: 3 }
       ],
-      playlistName: 'Playlist 1', //String conaining the Playlist Name
-      playlistTracks: [ //Array of objects containing the name, artist, album and id properties 
-        { name: 'PlayList 1', artist: 'Artist 1', album: 'Album 1', id: 1 },
-        { name: 'PlayList 2', artist: 'Artist 2', album: 'Album 2', id: 2 },
-        { name: 'PlayList 3', artist: 'Artist 3', album: 'Album 3', id: 3 }
+      playlistName: 'Playlist 122', //String conaining the new Playlist Name
+      playlistTracks: [ //Array of objects containing the name, artist, album and id properties of tracks from My Playlists
+        { name: 'PlayList Name 1', artist: 'Artist 1', album: 'Album 1', id: 4 },
+        { name: 'PlayList Name 2', artist: 'Artist 2', album: 'Album 2', id: 5 },
+        { name: 'PlayList Name 3', artist: 'Artist 3', album: 'Album 3', id: 6 }
       ]
+    };
+
+    /*Creating a component class method that uses the .this keyword requires, binding that method inside of the constructor fucntion of the given component class.
+    bind() creates a new function that, when called, has its this keyword set to the provided value.*/
+    this.addTrack = this.addTrack.bind(this);
+  }
+
+  addTrack(track) { //Method accepting the track argument, which is an object containing name, artist, album etc.
+
+    let tracks = this.state.playlistTracks; //Variable assigned the value of the playlistTracks Array from current state
+
+    //Conditional used to check if the song id we want to add matches the same id in the playlist of the user. If so we breack out the method
+    if (tracks.find(savedTrack => savedTrack.id === track.id)) {//.find() returns the value of the first element in an array that satisfies the test condition
+      return;
     }
+
+    tracks.push(track); //Method that adds the current song to the end of the playlistTracks array and returns the new length of the given arrays
+
+    /* this.setState() takes an object, and merges that object with the component’s current state.
+    If there are properties in the current component state that aren’t part of that object, then those properties remain unchanged */
+    this.setState({ playlistTracks: tracks });
   }
 
   render() { //A Component class must contain the render() method. Rendering is the only way for a component to pass props to another component.
@@ -45,6 +65,7 @@ class App extends React.Component {
             {/*Component Instance of the SearchResults Class. Instances inherit all methods of the Component Class*/}
             <SearchResults
               searchResults={this.state.searchResults} //Passes the state of the App component’s searchResults object to the SearchResults component
+              onAdd={this.addTrack} //Passes the addTrack method to the SearchResults Component attribute named onAdd
             />
 
             {/*Component Instance of the Playlist Class. Instances inherit all methods of the Component Class*/}
