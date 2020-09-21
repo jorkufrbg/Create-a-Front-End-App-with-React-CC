@@ -8,7 +8,7 @@ ReactDOM.render( //Method that renders JSX element to the DOM by taking a JSX ex
   <React.StrictMode> {/*StrictMode highlights potential problems in applications. Activates additional checks & warnings for its descendants*/}
     <App />
   </React.StrictMode>,
-  document.getElementById('root')
+  document.getElementById('root') //Container for the rendered React 
 );
 
 // If you want your app to work offline and load faster, you can change

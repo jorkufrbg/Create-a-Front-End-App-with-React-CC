@@ -17,9 +17,10 @@ class Track extends React.Component {//Component Class(Not a component!). But a 
         return (//Returns the JSX representation of the Component instance
             <div className="Track">
                 <div className="Track-information">
-                    <h3>track name</h3>
-                    <p>track artist | track album</p>
+                    <h3>{this.props.track.name}</h3>   {/* Props used to access the track's name from the TrackList Component's attribute named track*/}
+                    <p>{this.props.track.artist} | {this.props.track.album}</p> {/* Props used to access the track's artist and album  from the TrackList Componnent attribute named track*/}
                 </div>
+
                 {this.renderAction()} {/* Renders the method */}
             </div>
         );
