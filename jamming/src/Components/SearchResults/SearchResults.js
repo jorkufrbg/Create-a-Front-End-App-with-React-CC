@@ -2,14 +2,12 @@ import React from 'react'; //Imports the library & creates an object containing 
 import './SearchResults.css';
 import TrackList from '../TrackList/TrackList';
 
-/*  Components are reusable pieces of code that define the appearance, behaviour & state of a portion of the Application.
-They can be defined as a function or a class */
-class SearchResults extends React.Component {//Component Class(Not a component!). But a factory that produces Components by following a set of instructions
+/*Components are reusable pieces of code that define the appearance, behaviour & state of a part of the Application. They are defined as function or class
+Component Classes are factories that produce Components with each his own unique props and local state by following a set of instructions.*/
+class SearchResults extends React.Component {
 
-    render() {//A Component class must contain the render() method
-
-        return (//Returns the JSX representation of the Component instance
-
+    render() {//A Component class must contain the render() method. Rendering is the only way for a component to pass props to another component.
+        return (//Returns the JSX representation of the Component instance. Needed to make a component display data
             <div className="SearchResults">
                 <h2>Results</h2>
 
@@ -17,6 +15,7 @@ class SearchResults extends React.Component {//Component Class(Not a component!)
                 <TrackList
                     tracks={this.props.searchResults} /*Search Results Component passes information to tracks attribute of the TrackList Component*/
                 />
+
             </div>
         );
     }
