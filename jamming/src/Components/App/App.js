@@ -19,8 +19,8 @@ class App extends React.Component {
     this.state = { //Object representing initial state of the component.
       searchResults: [ //Array of objects containing the name, artist, album and id properties from search results
         { name: 'Made of Light', artist: 'Emperor', album: 'Dispositions', id: 1 },
-        { name: 'All for you', artist: 'Wilkinson', album: 'single', id: 2 },
-        { name: 'Into the FIre', artist: 'Kove', album: 'Nightfires', id: 3 }
+        { name: 'All for You', artist: 'Wilkinson', album: 'single', id: 2 },
+        { name: 'Into the Fire', artist: 'Kove', album: 'Nightfires', id: 3 }
       ],
       playlistName: 'Playlist 122', //String conaining the new Playlist Name
       playlistTracks: [ //Array of objects containing the name, artist, album and id properties of tracks from My Playlists
@@ -33,10 +33,10 @@ class App extends React.Component {
     /*Creating a component class method that uses the .this keyword requires, binding that method inside of the constructor fucntion of the given component class.
     bind() creates a new function that, when called, has its this keyword set to the provided value.*/
     this.addTrack = this.addTrack.bind(this);
+    this.removeTrack = this.removeTrack.bind(this);
   }
 
-  addTrack(track) { //Method accepting the track argument, which is an object containing name, artist, album etc.
-
+  addTrack(track) {//Method accepting argument track, which is an object containing name, artist, album etc. Pushes track to playlistTracks array of the user
     let tracks = this.state.playlistTracks; //Variable assigned the value of the playlistTracks Array from current state
 
     //Conditional used to check if the song id we want to add matches the same id in the playlist of the user. If so we breack out the method
@@ -49,6 +49,15 @@ class App extends React.Component {
     /* this.setState() takes an object, and merges that object with the component’s current state.
     If there are properties in the current component state that aren’t part of that object, then those properties remain unchanged */
     this.setState({ playlistTracks: tracks });
+  }
+
+  removeTrack(track) {//Method with argument track. Uses the track id property to filter it out from playlistTracks and set a new state of playlist
+    let tracks = this.state.playlistTracks; //Variable assigned the value of the playlistTracks Array from current state
+
+    /*Looks through each item id property of the tracks array, and if the id is not equal to the track id that was clicked on it goes in the new tracks array. If they are equal, it gets filtered out(removed) */
+    tracks = tracks.filter(currentTrack => currentTrack.id !== track.id);
+
+    this.setState({ playlistTracks: tracks }); //Takes an object, and merges it with the component’s current state.
   }
 
   render() { //A Component class must contain the render() method. Rendering is the only way for a component to pass props to another component.
@@ -72,6 +81,7 @@ class App extends React.Component {
             <Playlist
               playlistName={this.state.playlistName} //Passes the state of the App component’s playlistName string to the Playlist component
               playlistTracks={this.state.playlistTracks} //Passes the state of the App component’s playlistTracks array to the Playlist component
+              onRemove={this.removeTrack} //Passes the new state from removeTrack() to the Playlist Component as onRemove property
             />
 
           </div>

@@ -12,9 +12,11 @@ class TrackList extends React.Component {
                 {
                     this.props.tracks.map(track => { // .map() Method renders every single track in the track property of the Track Component Instance
                         return <Track
-                            track={track} //Passes the current track as an attribute called track to the Track component.
+                            track={track} //Passes the current track as an attribute called track to the Track component as attribute named track.
                             key={track.id} //Keys are unique strings used by React in order to correctly pair each element with it's coresponding array item.
-                            onAdd={this.props.onAdd} //Passes onAdd from the TrackList component to the Track component
+                            onAdd={this.props.onAdd} //Passes onAdd from the TrackList component to the Track component as an attribute onAdd
+                            onRemove={this.props.onRemove} //Passes onRemove from TrackList component to the Track component as an attribute onRemove
+                            isRemoval={this.props.isRemoval} //Passes isRemoval from the TrackList component to the Track component as attribute isRemoval
                         />
                     })
                 }

@@ -14,6 +14,8 @@ class Playlist extends React.Component {
                 {/* Component Instance of the TrackList Class. Instances inherit all methods of the Component Class*/}
                 <TrackList
                     tracks={this.props.playlistTracks} //Passes the playlist tracks from the Playlist Component to the TrackList Component. Through .props
+                    onRemove={this.props.onRemove} //Passes the new state of removeTrack() from Playlist Component to the TrackList Component
+                    isRemoval={true}
                 />
 
                 <button className="Playlist-save">SAVE TO SPOTIFY</button>

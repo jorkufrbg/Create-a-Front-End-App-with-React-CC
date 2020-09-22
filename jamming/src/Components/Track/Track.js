@@ -14,12 +14,14 @@ class Track extends React.Component {
         /*Creating a component class method that uses the .this keyword requires, binding that method inside of the constructor fucntion of the given component class.
         bind() creates a new function that, when called, has its this keyword set to the provided value.*/
         this.addTrack = this.addTrack.bind(this);
+        this.removeTrack = this.removeTrack.bind(this);
     }
 
     renderAction() {//Method displaying - or + in the <button> element depending on the boolean value of isRemoval
         if (this.props.isRemoval) {
             return <button
                 className="Track-action"
+                onClick={this.removeTrack} //Adds an onClick property with the value of removeTrack() method
             >-</button>
         } else {
             return <button
@@ -31,6 +33,10 @@ class Track extends React.Component {
 
     addTrack() {//Uses the addTrack(track) Method passed down from App Component Class to push the current track to a playlist
         this.props.onAdd(this.props.track);
+    }
+
+    removeTrack() {//Uses the removeTrack(track) Method passed from App Component Class to remove selected track from the playlist
+        this.props.onRemove(this.props.track); //Assigns this.props.track value to the onRemove Method
     }
 
     render() {//A Component class must contain the render() method. Rendering is the only way for a component to pass props to another component.
