@@ -16,7 +16,7 @@ class App extends React.Component {
      Information that gets passed from one component to another is known as “props.”] */
     super(props);
 
-    this.state = { //Object representing initial state of the component.
+    this.state = { //Object representing the state of the component.
       searchResults: [ //Array of objects containing the name, artist, album & id properties from search results
         { name: 'Made of Light', artist: 'Emperor', album: 'Dispositions', id: 1 },
         { name: 'All for You', artist: 'Wilkinson', album: 'single', id: 2 },
@@ -36,6 +36,7 @@ class App extends React.Component {
     this.removeTrack = this.removeTrack.bind(this);
     this.updatePlaylistName = this.updatePlaylistName.bind(this);
     this.savePlaylist = this.savePlaylist.bind(this);
+    this.search = this.search.bind(this);
   }
 
   addTrack(track) {//Method accepting argument track, which is an object containing name, artist, album etc. Pushes track to playlistTracks array of the user
@@ -70,6 +71,10 @@ class App extends React.Component {
     const trackUris = this.state.playlistTracks.map(track => track.uri);
   }
 
+  search(term) { //Method that accepts a search term argument and logs in to the console
+    console.log(term);
+  }
+
   render() { //A Component class must contain the render() method. Rendering is the only way for a component to pass props to another component.
     return ( //Returns the JSX representation of the Component instance. Needed to make a component display data
       <div>
@@ -77,7 +82,9 @@ class App extends React.Component {
         <div className="App">
 
           {/*Component Instance of the SearchBar Class. Instances inherit all methods of the Component Class*/}
-          <SearchBar />
+          <SearchBar
+            onSearch={this.search} //Passes the search method from App Component to Search Bar Component as onSearch prop attribute
+          />
 
           <div className="App-playlist">
 
