@@ -35,6 +35,7 @@ class App extends React.Component {
     this.addTrack = this.addTrack.bind(this);
     this.removeTrack = this.removeTrack.bind(this);
     this.updatePlaylistName = this.updatePlaylistName.bind(this);
+    this.savePlaylist = this.savePlaylist.bind(this);
   }
 
   addTrack(track) {//Method accepting argument track, which is an object containing name, artist, album etc. Pushes track to playlistTracks array of the user
@@ -65,6 +66,10 @@ class App extends React.Component {
     this.setState({ playlistName: name });
   }
 
+  savePlaylist() { //Method that generates an array of uri values called trackUris from the playlistTracks prop
+    const trackUris = this.state.playlistTracks.map(track => track.uri);
+  }
+
   render() { //A Component class must contain the render() method. Rendering is the only way for a component to pass props to another component.
     return ( //Returns the JSX representation of the Component instance. Needed to make a component display data
       <div>
@@ -86,8 +91,9 @@ class App extends React.Component {
             <Playlist
               playlistName={this.state.playlistName} //Passes the state of the App component’s playlistName string to the Playlist component
               playlistTracks={this.state.playlistTracks} //Passes the state of the App component’s playlistTracks array to the Playlist component
-              onRemove={this.removeTrack} //Passes the new state from removeTrack() to the Playlist Component as onRemove property
+              onRemove={this.removeTrack} //Passes the new state from removeTrack() to the Playlist Component as onRemove attribute
               onNameChange={this.updatePlaylistName}//Passes updatePlaylistName() from App Component to the Playlist Component as an attribute named onNameChange
+              onSave={this.savePlaylist}//Passes savePlaylist() from App Component to Playlist Component as an onSave attribute
             />
 
           </div>

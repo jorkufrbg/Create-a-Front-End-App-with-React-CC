@@ -37,7 +37,10 @@ class Playlist extends React.Component {
                     isRemoval={true}
                 />
 
-                <button className="Playlist-save">SAVE TO SPOTIFY</button>
+                <button
+                    className="Playlist-save"
+                    onClick={this.props.onSave} //When the button is clicked, we call the onSave Method passed down from App Component
+                >SAVE TO SPOTIFY</button>
             </div>
         );
     }
