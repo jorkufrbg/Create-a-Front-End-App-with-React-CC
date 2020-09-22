@@ -5,6 +5,7 @@ import './App.css';
 import Playlist from '../Playlist/Playlist';
 import SearchBar from '../SearchBar/SearchBar';
 import SearchResults from '../SearchResults/SearchResults';
+import Spotify from '../../util/Spotify';
 
 /*Components are reusable pieces of code that define the appearance, behaviour & state of a part of the Application. They are defined as function or class
 Component Classes are factories that produce Components with each his own unique props & local state by following a set of instructions.*/
@@ -72,7 +73,12 @@ class App extends React.Component {
   }
 
   search(term) { //Method that accepts a search term argument and logs in to the console
+
     console.log(term);
+
+    Spotify.search(term).then(searchResults => {//Updates the value of the search results with the value resolved from Spotify.search()‘s promise
+      this.setState({ searchResults: searchResults }); // searchResults state will be set to the value returned from the searchResults promise
+    });
   }
 
   render() { //A Component class must contain the render() method. Rendering is the only way for a component to pass props to another component.

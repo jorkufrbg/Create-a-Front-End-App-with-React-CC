@@ -26,6 +26,7 @@ class SearchBar extends React.Component {
     handleTermChange(e) { //Method accepting an event argument, then setting the state of the search bar term to the event target's value
         this.setState({ term: e.target.value });
     }
+
     render() { //A Component class must contain the render() method. Rendering is the only way for a component to pass props to another component.
         return (//Returns the JSX representation of the Component instance. Needed to make a component display data
             <div className="SearchBar">
@@ -33,7 +34,10 @@ class SearchBar extends React.Component {
                     placeholder="Enter A Song, Album, or Artist"
                     onChange={this.handleTermChange} //Byn typing, this event fires and passes an event object containing the typed in key to handleTermChange()
                 />
-                <button className="SearchButton">SEARCH</button>
+                <button
+                    className="SearchButton"
+                    onClick={this.search}
+                >SEARCH</button>
             </div>
         );
     }
