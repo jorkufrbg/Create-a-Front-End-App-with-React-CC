@@ -7,7 +7,7 @@ import SearchBar from '../SearchBar/SearchBar';
 import SearchResults from '../SearchResults/SearchResults';
 
 /*Components are reusable pieces of code that define the appearance, behaviour & state of a part of the Application. They are defined as function or class
-Component Classes are factories that produce Components with each his own unique props and local state by following a set of instructions.*/
+Component Classes are factories that produce Components with each his own unique props & local state by following a set of instructions.*/
 class App extends React.Component {
 
   constructor(props) { //Constructor Method to init object's state in a Class. Assigns an object to this.state. Makes it a STATEFUL Component
@@ -17,13 +17,13 @@ class App extends React.Component {
     super(props);
 
     this.state = { //Object representing initial state of the component.
-      searchResults: [ //Array of objects containing the name, artist, album and id properties from search results
+      searchResults: [ //Array of objects containing the name, artist, album & id properties from search results
         { name: 'Made of Light', artist: 'Emperor', album: 'Dispositions', id: 1 },
         { name: 'All for You', artist: 'Wilkinson', album: 'single', id: 2 },
         { name: 'Into the Fire', artist: 'Kove', album: 'Nightfires', id: 3 }
       ],
-      playlistName: 'Playlist 122', //String conaining the new Playlist Name
-      playlistTracks: [ //Array of objects containing the name, artist, album and id properties of tracks from My Playlists
+      playlistName: 'New Playlist', //String conaining the new Playlist Name
+      playlistTracks: [ //Array of objects containing the name, artist, album & id properties of tracks from My Playlists
         { name: 'PlayList Name 1', artist: 'Artist 1', album: 'Album 1', id: 4 },
         { name: 'PlayList Name 2', artist: 'Artist 2', album: 'Album 2', id: 5 },
         { name: 'PlayList Name 3', artist: 'Artist 3', album: 'Album 3', id: 6 }
@@ -34,6 +34,7 @@ class App extends React.Component {
     bind() creates a new function that, when called, has its this keyword set to the provided value.*/
     this.addTrack = this.addTrack.bind(this);
     this.removeTrack = this.removeTrack.bind(this);
+    this.updatePlaylistName = this.updatePlaylistName.bind(this);
   }
 
   addTrack(track) {//Method accepting argument track, which is an object containing name, artist, album etc. Pushes track to playlistTracks array of the user
@@ -44,20 +45,24 @@ class App extends React.Component {
       return;
     }
 
-    tracks.push(track); //Method that adds the current song to the end of the playlistTracks array and returns the new length of the given arrays
+    tracks.push(track); //Method that adds the current song to the end of the playlistTracks array & returns the new length of the given arrays
 
-    /* this.setState() takes an object, and merges that object with the component’s current state.
+    /* this.setState() takes an object, & merges that object with the component’s current state.
     If there are properties in the current component state that aren’t part of that object, then those properties remain unchanged */
     this.setState({ playlistTracks: tracks });
   }
 
-  removeTrack(track) {//Method with argument track. Uses the track id property to filter it out from playlistTracks and set a new state of playlist
+  removeTrack(track) {//Method with argument track. Uses the track id property to filter it out from playlistTracks & set a new state of playlist
     let tracks = this.state.playlistTracks; //Variable assigned the value of the playlistTracks Array from current state
 
-    /*Looks through each item id property of the tracks array, and if the id is not equal to the track id that was clicked on it goes in the new tracks array. If they are equal, it gets filtered out(removed) */
+    /*Looks through each item id property of the tracks array, & if the id is not equal to the track id that was clicked on it goes in the new tracks array. If they are equal, it gets filtered out(removed) */
     tracks = tracks.filter(currentTrack => currentTrack.id !== track.id);
 
-    this.setState({ playlistTracks: tracks }); //Takes an object, and merges it with the component’s current state.
+    this.setState({ playlistTracks: tracks }); //Takes an object, & merges it with the component’s current state.
+  }
+
+  updatePlaylistName(name) { //Method with argument name. Sets the state of the playlist name to the input argument
+    this.setState({ playlistName: name });
   }
 
   render() { //A Component class must contain the render() method. Rendering is the only way for a component to pass props to another component.
@@ -82,6 +87,7 @@ class App extends React.Component {
               playlistName={this.state.playlistName} //Passes the state of the App component’s playlistName string to the Playlist component
               playlistTracks={this.state.playlistTracks} //Passes the state of the App component’s playlistTracks array to the Playlist component
               onRemove={this.removeTrack} //Passes the new state from removeTrack() to the Playlist Component as onRemove property
+              onNameChange={this.updatePlaylistName}//Passes updatePlaylistName() from App Component to the Playlist Component as an attribute named onNameChange
             />
 
           </div>
