@@ -18,17 +18,9 @@ class App extends React.Component {
     super(props);
 
     this.state = { //Object representing the state of the component.
-      searchResults: [ //Array of objects containing the name, artist, album & id properties from search results
-        { name: 'Made of Light', artist: 'Emperor', album: 'Dispositions', id: 1 },
-        { name: 'All for You', artist: 'Wilkinson', album: 'single', id: 2 },
-        { name: 'Into the Fire', artist: 'Kove', album: 'Nightfires', id: 3 }
-      ],
+      searchResults: [], //Array of objects containing the name, artist, album & id properties from search results
       playlistName: 'New Playlist', //String conaining the new Playlist Name
-      playlistTracks: [ //Array of objects containing the name, artist, album & id properties of tracks from My Playlists
-        { name: 'PlayList Name 1', artist: 'Artist 1', album: 'Album 1', id: 4 },
-        { name: 'PlayList Name 2', artist: 'Artist 2', album: 'Album 2', id: 5 },
-        { name: 'PlayList Name 3', artist: 'Artist 3', album: 'Album 3', id: 6 }
-      ]
+      playlistTracks: [] //Array of objects containing the name, artist, album & id properties of tracks from My Playlists
     };
 
     /*Creating a component class method that uses the .this keyword requires, binding that method inside of the constructor fucntion of the given component class.
@@ -56,6 +48,7 @@ class App extends React.Component {
   }
 
   removeTrack(track) {//Method with argument track. Uses the track id property to filter it out from playlistTracks & set a new state of playlist
+
     let tracks = this.state.playlistTracks; //Variable assigned the value of the playlistTracks Array from current state
 
     /*Looks through each item id property of the tracks array, & if the id is not equal to the track id that was clicked on it goes in the new tracks array. If they are equal, it gets filtered out(removed) */
@@ -69,7 +62,15 @@ class App extends React.Component {
   }
 
   savePlaylist() { //Method that generates an array of uri values called trackUris from the playlistTracks prop
+
     const trackUris = this.state.playlistTracks.map(track => track.uri);
+
+    Spotify.savePlaylist(this.state.playlistName, trackUris).then(() => { //savePlaylist() method calls Spotify.savePlaylist from Spotify object
+      this.setState({ //After calling Spotify.savePlaylist(), resets the state of playlistName to 'New Playlist' and playlistTracks to an empty array.
+        playlistName: 'New Playlist',
+        playlistTracks: []
+      });
+    });
   }
 
   search(term) { //Method that accepts a search term argument and logs in to the console

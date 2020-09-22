@@ -60,6 +60,47 @@ const Spotify = { //Object stoing the functionality needed to interact with the 
                 uri: track.uri
             }));
         });
+    },
+
+    savePlaylist(name, trackUris) {
+
+        if (!name || !trackUris.length) { //Checks if there are values saved to the method’s two arguments. If not, return
+            return;
+        }
+
+        const accessToken = Spotify.getAccessToken(); //Givess acces to the Access Token 
+        const headers = { Authorization: `Bearer ${accessToken}` } //Variable containing the user’s access token in the implicit grant flow request format
+        let userId; //Empty variable for the user’s ID
+
+        //Request returning the user's Spotify username, from the Spotify endpoint and converting it to JSON
+        return fetch(`https://api.spotify.com/v1/me`, { headers: headers } //Request to endpoint & headers object
+        ).then(response => { return response.json() } //Converting response to JSON
+        ).then(jsonResponse => {
+
+            userId = jsonResponse.id; //Saves the response id to the userId variable
+
+            return fetch(`https://api.spotify.com/v1/users/${userId}/playlists`, //Spotify endpoint for creating a playlist
+                {
+                    headers: headers,
+                    method: 'POST',
+                    body: JSON.stringify({ name: name })//JSON.stringify() converts a value to a JSON string.
+                }
+            ).then(response => response.json()
+            ).then(jsonResponse => { //Converts the response to json and saves it to playlistId variable
+
+                const playlistId = jsonResponse.id; //Converted response to JSON and saved it's id parameter in a variable
+
+                //The returned user ID is used to make a POST request that creates a new playlist in the user’s account and returns a playlist ID.
+                return fetch(`https://api.spotify.com/v1/users/${userId}/playlists/${playlistId}/tracks`, //Spotify endpoint for adding tracks to playlists
+                    {
+                        headers: headers,
+                        method: 'POST',
+                        body: JSON.stringify({ uris: trackUris }) //Sets the URIs parameter to an array of track URIs passed into the method.
+                    }
+                );
+            });
+        });
+
     }
 };
 
