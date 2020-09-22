@@ -30,9 +30,11 @@ class App extends React.Component {
     this.updatePlaylistName = this.updatePlaylistName.bind(this);
     this.savePlaylist = this.savePlaylist.bind(this);
     this.search = this.search.bind(this);
+
   }
 
   addTrack(track) {//Method accepting argument track, which is an object containing name, artist, album etc. Pushes track to playlistTracks array of the user
+
     let tracks = this.state.playlistTracks; //Variable assigned the value of the playlistTracks Array from current state
 
     //Conditional used to check if the song id we want to add matches the same id in the playlist of the user. If so we breack out the method
@@ -45,6 +47,7 @@ class App extends React.Component {
     /* this.setState() takes an object, & merges that object with the component’s current state.
     If there are properties in the current component state that aren’t part of that object, then those properties remain unchanged */
     this.setState({ playlistTracks: tracks });
+
   }
 
   removeTrack(track) {//Method with argument track. Uses the track id property to filter it out from playlistTracks & set a new state of playlist
@@ -55,6 +58,7 @@ class App extends React.Component {
     tracks = tracks.filter(currentTrack => currentTrack.id !== track.id);
 
     this.setState({ playlistTracks: tracks }); //Takes an object, & merges it with the component’s current state.
+
   }
 
   updatePlaylistName(name) { //Method with argument name. Sets the state of the playlist name to the input argument
@@ -71,6 +75,7 @@ class App extends React.Component {
         playlistTracks: []
       });
     });
+
   }
 
   search(term) { //Method that accepts a search term argument and logs in to the console
@@ -80,6 +85,7 @@ class App extends React.Component {
     Spotify.search(term).then(searchResults => {//Updates the value of the search results with the value resolved from Spotify.search()‘s promise
       this.setState({ searchResults: searchResults }); // searchResults state will be set to the value returned from the searchResults promise
     });
+
   }
 
   render() { //A Component class must contain the render() method. Rendering is the only way for a component to pass props to another component.

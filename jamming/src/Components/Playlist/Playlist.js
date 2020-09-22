@@ -14,12 +14,14 @@ class Playlist extends React.Component {
 
         /*Creating a component class method that uses the .this keyword requires, binding that method inside of the constructor fucntion of the given component class. bind() creates a new function that, when called, has its this keyword set to the provided value.*/
         this.handleNameChange = this.handleNameChange.bind(this);
+
     }
 
     handleNameChange(e) { //Method accepting an event triggered by onChange atribute in the Playlist Component's Input element
 
         /* The passed in event has properties we can access with dot notation. e.target.value gives us access to the keys the user is typing and we pass that to onNameChange prop. Then the updatePlaylistName inside the App Component will update the state of the playlist name */
         this.props.onNameChange(e.target.value);
+
     }
 
     render() { //A Component class must contain the render() method. Rendering is the only way for a component to pass props to another component.

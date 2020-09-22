@@ -19,6 +19,7 @@ const Spotify = { //Object stoing the functionality needed to interact with the 
         if (accessTokenMatch && expirationTimeMatch) {//Checks for access token & expiration time in the URL & sets the Access Token Value to an empty string
 
             accessToken = accessTokenMatch[1]; //Sets the access token value
+
             const expirationTime = Number(expirationTimeMatch[1]); //When used as a function, Number(value) converts a string or other value to the Number type
 
             /* Clears the parameters from the URL, so the app doesn’t try grabbing the access token after it has expired 
@@ -27,13 +28,17 @@ const Spotify = { //Object stoing the functionality needed to interact with the 
             window.setTimeout(() => accessToken = '', expirationTime * 1000); // uses the setTimeout Method to set the accessToken to an empty string
             window.history.pushState('Access Token', null, '/');
             return accessToken;
+
         } else { //If there are not Access Token & Inspiration Time, redirects the user to Spotify authorization URI
+
             const accessUrl = `https://accounts.spotify.com/authorize?client_id=${clientId}&response_type=token&scope=playlist-modify-public&redirect_uri=${redirectUri}`;
+
             window.location = accessUrl; //Sets the current page address(URL) & redirects the browser to a new page.
         }
     },
 
     search(term) { //Method accepting parameter for the user's search term
+
         const accessToken = Spotify.getAccessToken(); //Givess acces to the Access Token when doing a search
 
         /* JS Fetch API is used to access & manipulate requests & responses within the HTTP pipeline, fetching resources asynchronously across a network
@@ -59,7 +64,9 @@ const Spotify = { //Object stoing the functionality needed to interact with the 
                 album: track.album.name,
                 uri: track.uri
             }));
+
         });
+
     },
 
     savePlaylist(name, trackUris) {
@@ -74,8 +81,7 @@ const Spotify = { //Object stoing the functionality needed to interact with the 
 
         //Request returning the user's Spotify username, from the Spotify endpoint and converting it to JSON
         return fetch(`https://api.spotify.com/v1/me`, { headers: headers } //Request to endpoint & headers object
-        ).then(response => { return response.json() } //Converting response to JSON
-        ).then(jsonResponse => {
+        ).then(response => response.json()).then(jsonResponse => { //Converting response to JSON
 
             userId = jsonResponse.id; //Saves the response id to the userId variable
 
@@ -85,8 +91,7 @@ const Spotify = { //Object stoing the functionality needed to interact with the 
                     method: 'POST',
                     body: JSON.stringify({ name: name })//JSON.stringify() converts a value to a JSON string.
                 }
-            ).then(response => response.json()
-            ).then(jsonResponse => { //Converts the response to json and saves it to playlistId variable
+            ).then(response => response.json()).then(jsonResponse => { //Converts the response to json
 
                 const playlistId = jsonResponse.id; //Converted response to JSON and saved it's id parameter in a variable
 
@@ -98,7 +103,9 @@ const Spotify = { //Object stoing the functionality needed to interact with the 
                         body: JSON.stringify({ uris: trackUris }) //Sets the URIs parameter to an array of track URIs passed into the method.
                     }
                 );
+
             });
+
         });
 
     }

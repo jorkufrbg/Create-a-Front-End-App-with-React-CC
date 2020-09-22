@@ -15,9 +15,11 @@ class Track extends React.Component {
         bind() creates a new function that, when called, has its this keyword set to the provided value.*/
         this.addTrack = this.addTrack.bind(this);
         this.removeTrack = this.removeTrack.bind(this);
+
     }
 
     renderAction() {//Method displaying - or + in the <button> element depending on the boolean value of isRemoval
+
         if (this.props.isRemoval) {
             return <button
                 className="Track-action"
@@ -29,6 +31,7 @@ class Track extends React.Component {
                 onClick={this.addTrack} //Adds an onClick property with the pushed track value from the playlist
             >+</button>
         }
+
     }
 
     addTrack() {//Uses the addTrack(track) Method passed down from App Component Class to push the current track to a playlist
