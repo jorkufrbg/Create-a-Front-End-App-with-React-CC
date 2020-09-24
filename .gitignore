@@ -6,3 +6,4 @@ node_modules/
 jamming/package-lock.json
 jamming/public/logo192.png
 jamming/public/logo512.png
+jamming/build/

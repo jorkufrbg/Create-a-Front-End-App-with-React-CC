@@ -1,5 +1,5 @@
 const clientId = '48b2d5daf54440aeb83b88d15c027136'; //Variable containing client ID of the Application
-const redirectUri = 'http://localhost:3000/'; //Variable containing hite-listed addresses to redirect to after authentication success OR failure
+const redirectUri = 'http://jamming-cc.surge.sh'; //Variable containing hite-listed addresses to redirect to after authentication success OR failure
 let accessToken; //Variable containing user's access token
 
 const Spotify = { //Object stoing the functionality needed to interact with the Spotify API
